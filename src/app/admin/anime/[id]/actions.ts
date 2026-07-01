@@ -11,7 +11,7 @@ export async function addEpisode(animeId: string, formData: FormData) {
   const title = formData.get("title") as string;
 
   if (isNaN(episodeNumber) || !videoUrl) {
-    return { error: "Episode number and Video URL are required." };
+    throw new Error("Episode number and Video URL are required.");
   }
 
   const { error } = await supabase
@@ -25,7 +25,7 @@ export async function addEpisode(animeId: string, formData: FormData) {
 
   if (error) {
     console.error("Add Episode Error:", error);
-    return { error: error.message };
+    throw new Error(error.message);
   }
 
   // Update the anime's episodes_count
@@ -44,7 +44,6 @@ export async function addEpisode(animeId: string, formData: FormData) {
 
   revalidatePath(`/admin/anime/${animeId}`);
   revalidatePath("/");
-  return { success: true };
 }
 
 export async function deleteEpisode(episodeId: string, animeId: string) {
@@ -57,10 +56,9 @@ export async function deleteEpisode(episodeId: string, animeId: string) {
 
   if (error) {
     console.error("Delete Episode Error:", error);
-    return { error: error.message };
+    throw new Error(error.message);
   }
 
   revalidatePath(`/admin/anime/${animeId}`);
   revalidatePath("/");
-  return { success: true };
 }

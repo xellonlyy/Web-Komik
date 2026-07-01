@@ -84,7 +84,7 @@ export default async function Home({
 
         {/* Search Bar */}
         <div className="max-w-xl mx-auto mb-6">
-            <SearchBar defaultValue={query} />
+            <SearchBar />
         </div>
         
         {/* All Manga Button */}
@@ -98,7 +98,7 @@ export default async function Home({
         </div>
         
         {/* Genre Filter List */}
-        <GenreFilter tags={tagsData} currentGenre={genre} />
+        <GenreFilter />
 
         {isSearching ? (
           <section className="mx-auto max-w-7xl mt-8">

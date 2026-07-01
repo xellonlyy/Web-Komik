@@ -10,6 +10,7 @@ export interface MangaDexManga {
     status: string;
     year: number;
     tags: any[];
+    contentRating?: string;
   };
   relationships: any[];
 }
@@ -23,6 +24,7 @@ export interface MangaDexChapter {
     translatedLanguage: string;
     publishAt: string;
   };
+  relationships?: any[];
 }
 
 // 1. Fetch Popular Manga (with optional search, pagination, and genre filtering)
@@ -50,7 +52,7 @@ export async function getPopularManga(
       url += `&order[followedCount]=desc`; // Default to popular
     }
 
-    const res = await fetch(url, { next: { revalidate: 3600 , signal: AbortSignal.timeout(8000) } });
+    const res = await fetch(url, { next: { revalidate: 3600 }, signal: AbortSignal.timeout(8000) });
     const data = await res.json();
     
     if (!data.data) return { manga: [], covers: {}, total: 0 };
@@ -85,7 +87,7 @@ export async function getPopularManga(
 export async function getLatestUpdates(limit = 15): Promise<{ manga: MangaDexManga[], covers: Record<string, string> }> {
   try {
     const url = `${BASE_URL}/manga?limit=${limit}&includes[]=cover_art&hasAvailableChapters=true&availableTranslatedLanguage[]=en&availableTranslatedLanguage[]=id&contentRating[]=safe&contentRating[]=suggestive&originalLanguage[]=ja&originalLanguage[]=ko&originalLanguage[]=zh&originalLanguage[]=zh-hk&excludedTags[]=891cf039-b895-47f0-9229-bef4c96eccd4&excludedTags[]=b13b2a48-c720-44a9-9c77-39c9979373fb&excludedTags[]=7b2ce280-79ef-4c09-9b58-12b7c23a9b78&excludedTags[]=a3c67850-4684-404e-9b7f-c69850ee5da6&excludedTags[]=5920b825-4181-4a17-beeb-9918b0ff7a30&excludedTags[]=aafb99c1-7f60-43fa-b75f-fc9502ce29c7&excludedTags[]=0234a31e-a729-4e28-9d6a-3f87c4966b9e&order[latestUploadedChapter]=desc`;
-    const res = await fetch(url, { next: { revalidate: 1800 , signal: AbortSignal.timeout(8000) } });
+    const res = await fetch(url, { next: { revalidate: 1800 }, signal: AbortSignal.timeout(8000) });
     const data = await res.json();
     if (!data.data) return { manga: [], covers: {} };
     
@@ -122,7 +124,7 @@ export async function getPopularNew(limit = 15): Promise<{ manga: MangaDexManga[
     const yearStr = oneYearAgo.toISOString().split('T')[0] + 'T00:00:00';
     
     const url = `${BASE_URL}/manga?limit=${limit}&includes[]=cover_art&hasAvailableChapters=true&availableTranslatedLanguage[]=en&availableTranslatedLanguage[]=id&contentRating[]=safe&contentRating[]=suggestive&originalLanguage[]=ja&originalLanguage[]=ko&originalLanguage[]=zh&originalLanguage[]=zh-hk&excludedTags[]=891cf039-b895-47f0-9229-bef4c96eccd4&excludedTags[]=b13b2a48-c720-44a9-9c77-39c9979373fb&excludedTags[]=7b2ce280-79ef-4c09-9b58-12b7c23a9b78&excludedTags[]=a3c67850-4684-404e-9b7f-c69850ee5da6&excludedTags[]=5920b825-4181-4a17-beeb-9918b0ff7a30&excludedTags[]=aafb99c1-7f60-43fa-b75f-fc9502ce29c7&excludedTags[]=0234a31e-a729-4e28-9d6a-3f87c4966b9e&createdAtSince=${yearStr}&order[followedCount]=desc`;
-    const res = await fetch(url, { next: { revalidate: 86400 , signal: AbortSignal.timeout(8000) } });
+    const res = await fetch(url, { next: { revalidate: 86400 }, signal: AbortSignal.timeout(8000) });
     const data = await res.json();
     if (!data.data) return { manga: [], covers: {} };
     
@@ -155,7 +157,7 @@ export async function getPopularNew(limit = 15): Promise<{ manga: MangaDexManga[
 export async function getRecommended(limit = 15): Promise<{ manga: MangaDexManga[], covers: Record<string, string> }> {
   try {
     const url = `${BASE_URL}/manga?limit=${limit}&includes[]=cover_art&hasAvailableChapters=true&availableTranslatedLanguage[]=en&availableTranslatedLanguage[]=id&contentRating[]=safe&contentRating[]=suggestive&originalLanguage[]=ja&originalLanguage[]=ko&originalLanguage[]=zh&originalLanguage[]=zh-hk&excludedTags[]=891cf039-b895-47f0-9229-bef4c96eccd4&excludedTags[]=b13b2a48-c720-44a9-9c77-39c9979373fb&excludedTags[]=7b2ce280-79ef-4c09-9b58-12b7c23a9b78&excludedTags[]=a3c67850-4684-404e-9b7f-c69850ee5da6&excludedTags[]=5920b825-4181-4a17-beeb-9918b0ff7a30&excludedTags[]=aafb99c1-7f60-43fa-b75f-fc9502ce29c7&excludedTags[]=0234a31e-a729-4e28-9d6a-3f87c4966b9e&order[rating]=desc`;
-    const res = await fetch(url, { next: { revalidate: 86400 , signal: AbortSignal.timeout(8000) } });
+    const res = await fetch(url, { next: { revalidate: 86400 }, signal: AbortSignal.timeout(8000) });
     const data = await res.json();
     if (!data.data) return { manga: [], covers: {} };
     
