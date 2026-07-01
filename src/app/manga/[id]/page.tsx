@@ -65,10 +65,9 @@ export default async function MangaDetailPage({
             <div className="relative aspect-[3/4] rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.7)] ring-1 ring-white/20">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img 
-                src={coverUrl || "https://placehold.co/300x400/18181b/ffffff?text=No+Cover"} 
+                src={coverUrl ? `/api/image?url=${encodeURIComponent(coverUrl)}` : "https://placehold.co/300x400/18181b/ffffff?text=No+Cover"} 
                 alt={title}
                 className="w-full h-full object-cover"
-                referrerPolicy="no-referrer"
               />
             </div>
           </div>

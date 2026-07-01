@@ -21,10 +21,9 @@ export default function MangaCard({
       <div className="relative aspect-[3/4] w-full overflow-hidden bg-zinc-950">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={imageUrl || "https://placehold.co/300x400/09090b/ffffff?text=No+Cover"}
+          src={imageUrl ? `/api/image?url=${encodeURIComponent(imageUrl)}` : "https://placehold.co/300x400/09090b/ffffff?text=No+Cover"}
           alt={`Cover for ${title}`}
           className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-          referrerPolicy="no-referrer"
         />
         
         {/* Gradient Overlay for text readability */}
