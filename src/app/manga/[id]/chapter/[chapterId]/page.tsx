@@ -65,6 +65,7 @@ export default async function ChapterReaderPage({
               alt={`Page ${index + 1}`}
               className="w-full h-auto block select-none bg-zinc-900"
               loading="lazy"
+              referrerPolicy="no-referrer"
             />
           ))
         ) : externalUrl ? (

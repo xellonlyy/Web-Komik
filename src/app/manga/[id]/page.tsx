@@ -68,6 +68,7 @@ export default async function MangaDetailPage({
                 src={coverUrl || "https://placehold.co/300x400/18181b/ffffff?text=No+Cover"} 
                 alt={title}
                 className="w-full h-full object-cover"
+                referrerPolicy="no-referrer"
               />
             </div>
           </div>

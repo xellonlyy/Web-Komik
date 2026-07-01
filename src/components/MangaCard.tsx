@@ -24,6 +24,7 @@ export default function MangaCard({
           src={imageUrl || "https://placehold.co/300x400/09090b/ffffff?text=No+Cover"}
           alt={`Cover for ${title}`}
           className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+          referrerPolicy="no-referrer"
         />
         
         {/* Gradient Overlay for text readability */}
