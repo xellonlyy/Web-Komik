@@ -239,7 +239,7 @@ export async function getChapterDetail(chapterId: string): Promise<any> {
 // 4. Fetch Chapter Images (At-Home API)
 export async function getChapterImages(chapterId: string): Promise<string[]> {
   try {
-    const res = await fetch(`${BASE_URL}/at-home/server/${chapterId}`, { signal: AbortSignal.timeout(8000) });
+    const res = await fetch(`${BASE_URL}/at-home/server/${chapterId}`, { cache: 'no-store', signal: AbortSignal.timeout(8000) });
     const data = await res.json();
     
     if (!data.baseUrl || !data.chapter) return [];
