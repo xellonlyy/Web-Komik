@@ -1,26 +1,40 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
+@theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  
+  /* Custom Palette */
+  --color-primary-300: #5996FF;
+  --color-primary-400: #5996FF;
+  --color-primary-500: #3874FF;
+  --color-primary-600: #1B4EF5;
+  
+  --color-accent-300: #F4CEFF;
+  --color-accent-400: #F4CEFF;
+  --color-accent-500: #F4CEFF;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  --background: #09090b; /* zinc-950 */
+  --foreground: #fafafa; /* zinc-50 */
+  --plyr-color-main: #6366f1; /* indigo-500 */
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Plyr Customizations for Aspect Ratio Fix */
+.plyr {
+  height: 100% !important;
+  width: 100% !important;
+}
+.plyr__video-wrapper {
+  height: 100% !important;
+  width: 100% !important;
 }
