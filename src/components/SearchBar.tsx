@@ -120,7 +120,7 @@ export default function SearchBar() {
                 >
                   <div className="w-12 h-16 flex-shrink-0 bg-zinc-800 rounded overflow-hidden">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={manga.cover ? `/api/image?url=${encodeURIComponent(manga.cover)}` : "https://placehold.co/100x150/18181b/ffffff?text=X"} alt={manga.title} className="w-full h-full object-cover" />
+                    <img src={manga.cover || "https://placehold.co/100x150/18181b/ffffff?text=X"} alt={manga.title} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
                   </div>
                   <div className="flex flex-col flex-grow min-w-0">
                     <h4 className="text-zinc-100 font-semibold text-sm line-clamp-1">{manga.title}</h4>

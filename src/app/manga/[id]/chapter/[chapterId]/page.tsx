@@ -61,10 +61,11 @@ export default async function ChapterReaderPage({
             // eslint-disable-next-line @next/next/no-img-element
             <img 
               key={index}
-              src={`/api/image?url=${encodeURIComponent(imgUrl)}`}
+              src={imgUrl}
               alt={`Page ${index + 1}`}
               className="w-full h-auto block select-none bg-zinc-900"
               loading="lazy"
+              referrerPolicy="no-referrer"
             />
           ))
         ) : externalUrl ? (
